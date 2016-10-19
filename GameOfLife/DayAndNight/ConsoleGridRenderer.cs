@@ -9,35 +9,35 @@
 using System;
 using xtc.GameOfLife.Grids;
 
-namespace xtc.GameOfLife.GameOfLife
+namespace xtc.GameOfLife.DayAndNight
 {
 	/// <summary>
 	/// Description of ConsoleGridRenderer.
 	/// </summary>
 	public class ConsoleGridRenderer
-		: IGridRenderer<GameOfLifeCellMetadata>
+		: IGridRenderer<DayAndNightCellMetadata>
 	{
 		public ConsoleGridRenderer()
 		{
 		}
 		
-		public void RenderCell(Cell<GameOfLifeCellMetadata> cell) {
-			var color = cell.Payload.IsAlive ? ConsoleColor.Green : ConsoleColor.DarkGray;
+		public void RenderCell(Cell<DayAndNightCellMetadata> cell) {
+			var color = cell.Payload.IsAlive ? ConsoleColor.Yellow : ConsoleColor.DarkGray;
 			
 			switch (cell.Payload.Rule) {
-				case GameOfLifeRule.KeepAlive:
-					color = ConsoleColor.DarkGreen;
-					break;
-				case GameOfLifeRule.Respawn:
-					color = ConsoleColor.Green;
-					break;
-				case GameOfLifeRule.Overcrowded:
-					color = ConsoleColor.Magenta;
-					break;
-				case GameOfLifeRule.Underpopulated:
+				case DayAndNightRule.KeepAlive:
 					color = ConsoleColor.Yellow;
 					break;
-				case GameOfLifeRule.NoMatch:
+				case DayAndNightRule.Respawn:
+					color = ConsoleColor.DarkGreen;
+					break;
+				case DayAndNightRule.Overcrowded:
+					color = ConsoleColor.Magenta;
+					break;
+				case DayAndNightRule.Underpopulated:
+					color = ConsoleColor.Blue;
+					break;
+				case DayAndNightRule.NoMatch:
 					color = ConsoleColor.DarkGray;
 					break;
 				default:
@@ -50,7 +50,7 @@ namespace xtc.GameOfLife.GameOfLife
             Console.Write(cell.Payload.IsAlive ? "█" : "·");
         }
 
-        public void RenderGrid(Grid<GameOfLifeCellMetadata> grid) {
+        public void RenderGrid(Grid<DayAndNightCellMetadata> grid) {
 			Console.SetCursorPosition(0, 0);
 			
 			Console.ResetColor();
@@ -77,9 +77,7 @@ namespace xtc.GameOfLife.GameOfLife
 				var x = 0;
 				foreach (var cell in row)
 				{
-					RenderCell(cell);//, cell.Payload.IsAlive ? GameOfLifeRule.KeepAlive : GameOfLifeRule.NoMatch);
-					//Console.ForegroundColor = cell.Payload.IsAlive ? ConsoleColor.Green : ConsoleColor.DarkGray;
-					//Console.Write(cell.Payload.IsAlive ? "■" : " ");
+					RenderCell(cell);//, cell.Payload.IsAlive ? DayAndNightRule.KeepAlive : DayAndNightRule.NoMatch);
 					++x;
 				}
 				

@@ -56,6 +56,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DayAndNight\ConsoleGridRenderer.cs" />
+    <Compile Include="DayAndNight\DayAndNight.cs" />
+    <Compile Include="DayAndNight\DayAndNightCellMetadata.cs" />
+    <Compile Include="DayAndNight\DayAndNightCopyCellGenerator.cs" />
+    <Compile Include="DayAndNight\DayAndNightIterationCellGenerator.cs" />
+    <Compile Include="DayAndNight\DayAndNightRandomCellGenerator.cs" />
+    <Compile Include="DayAndNight\DayAndNightRule.cs" />
+    <Compile Include="DayAndNight\DayAndNightParsingCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLife.cs" />
     <Compile Include="GameOfLife\GameOfLifeCopyCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLifeIterationCellGenerator.cs" />
@@ -79,57 +87,66 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="examples\beacon.gol">
+    <Content Include="examples\GameOfLife\acorn.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <DesignData Include="examples\beehive.gol">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </DesignData>
-    <Content Include="examples\blinker.gol">
+    <Content Include="examples\GameOfLife\beacon.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\block.gol">
+    <Content Include="examples\GameOfLife\beehive.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\boat.gol">
+    <Content Include="examples\GameOfLife\blinker.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\example1.gol">
+    <Content Include="examples\GameOfLife\block.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\example2.gol">
+    <Content Include="examples\GameOfLife\boat.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\loaf.gol">
+    <Content Include="examples\GameOfLife\diehard.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\pentadecathlon.gol">
+    <Content Include="examples\GameOfLife\example1.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\pulsar.gol">
+    <Content Include="examples\GameOfLife\example2.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\toad.gol">
+    <Content Include="examples\GameOfLife\glider.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\glider.gol">
+    <Content Include="examples\GameOfLife\loaf.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\lwss.gol">
+    <Content Include="examples\GameOfLife\lwss.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\rpentomino.gol">
+    <Content Include="examples\GameOfLife\pentadecathlon.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\diehard.gol">
+    <Content Include="examples\GameOfLife\pulsar.gol">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="examples\acorn.gol">
+    <Content Include="examples\GameOfLife\rpentomino.gol">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="examples\GameOfLife\toad.gol">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="examples\DayAndNight\oscillator.dan">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="examples\DayAndNight\rocket.dan">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="examples" />
+    <Folder Include="DayAndNight" />
+    <Folder Include="examples\GameOfLife" />
+    <Folder Include="examples\DayAndNight" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

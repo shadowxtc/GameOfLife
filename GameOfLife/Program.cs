@@ -8,7 +8,7 @@
  */
 using System;
 using System.Threading;
-using xtc.GameOfLife.GameOfLife;
+using xtc.GameOfLife.Games;
 
 namespace xtc.GameOfLife
 {
@@ -17,7 +17,18 @@ namespace xtc.GameOfLife
 		public static void Main(string[] args)
 		{
 			while (true) {
-			    var game = new GameOfLife.GameOfLife(new ConsoleGridRenderer());
+				Console.WriteLine();
+				Console.WriteLine("Welcome to shadowxtc's C# Cellular Automata Simulation Playground");
+				Console.WriteLine();
+				Console.WriteLine("[1] Game of Life");
+				Console.WriteLine("[2] Day and Night");
+				Console.WriteLine();
+				Console.WriteLine("Your choice?");
+				
+				Game game = (Console.ReadLine() == "1" ? 
+				             (Game) new GameOfLife.GameOfLife(new GameOfLife.ConsoleGridRenderer()) :
+				             (Game) new DayAndNight.DayAndNight(new DayAndNight.ConsoleGridRenderer()));
+				
 			    game.StartGame();
 			    
 			    while (game.CurrentRound < game.MaxRounds && !game.GameOver)

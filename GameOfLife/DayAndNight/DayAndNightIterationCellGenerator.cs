@@ -11,50 +11,53 @@ using System.Linq;
 using xtc.GameOfLife.Grids;
 using xtc.GameOfLife.Geometry;
 
-namespace xtc.GameOfLife.GameOfLife
+namespace xtc.GameOfLife.DayAndNight
 {
 	/// <summary>
-	/// Description of GameOfLifeIterationCellGenerator.
+	/// Description of DayAndNightIterationCellGenerator.
 	/// </summary>
-	public class GameOfLifeIterationCellGenerator
-		: ICellGenerator<GameOfLifeCellMetadata>
+	public class DayAndNightIterationCellGenerator
+		: ICellGenerator<DayAndNightCellMetadata>
 	{
-		private readonly GameOfLife _game;
-		private readonly Grid<GameOfLifeCellMetadata> _grid;
-		private readonly IGridRenderer<GameOfLifeCellMetadata> _gridRenderer;
+		private readonly DayAndNight _game;
+		private readonly Grid<DayAndNightCellMetadata> _grid;
+		private readonly IGridRenderer<DayAndNightCellMetadata> _gridRenderer;
 		
-		private GameOfLifeIterationCellGenerator()
+		private DayAndNightIterationCellGenerator()
 		{
 		}
 		
-		public GameOfLifeIterationCellGenerator(GameOfLife game, Grid<GameOfLifeCellMetadata> grid, IGridRenderer<GameOfLifeCellMetadata> gridRenderer)
+		public DayAndNightIterationCellGenerator(DayAndNight game, Grid<DayAndNightCellMetadata> grid, IGridRenderer<DayAndNightCellMetadata> gridRenderer)
 		{
 			_game = game;
 			_grid = grid;
 			_gridRenderer = gridRenderer;
 		}
 
-		public Cell<GameOfLifeCellMetadata> Generate(Grid<GameOfLifeCellMetadata> grid, Coordinates2D coordinates) {
+		public Cell<DayAndNightCellMetadata> Generate(Grid<DayAndNightCellMetadata> grid, Coordinates2D coordinates) {
 			var currentCell = _grid[coordinates];
 			var livingNeighbors = currentCell.Neighbors.Count(neighbor => neighbor.Payload.IsAlive);
-			var matchingRule = GameOfLifeRule.NoMatch;
+			var matchingRule = DayAndNightRule.NoMatch;
 			var payload = currentCell.Payload;
-			
-			if (livingNeighbors < 2)
+
+			if (payload.IsAlive) 
 			{
-				matchingRule = GameOfLifeRule.Underpopulated;
+				if (livingNeighbors < 3) 
+				{
+					matchingRule = DayAndNightRule.Underpopulated;
+				}
+				else if (livingNeighbors == 5)
+				{
+					matchingRule = DayAndNightRule.Overcrowded;
+				}
+				else
+				{
+					matchingRule = DayAndNightRule.KeepAlive;
+				}
 			}
-			else if (livingNeighbors > 3)
+			else if (livingNeighbors == 3 || livingNeighbors > 5)
 			{
-				matchingRule = GameOfLifeRule.Overcrowded;
-			}
-			else if (livingNeighbors >= 2 && livingNeighbors <= 3 && payload.IsAlive)
-			{
-				matchingRule = GameOfLifeRule.KeepAlive;
-			}
-			else if (livingNeighbors == 3 && !payload.IsAlive)
-			{
-				matchingRule = GameOfLifeRule.Respawn;
+				matchingRule = DayAndNightRule.Respawn;
 			}
 
 		    var newPayloadAlive = payload.IsAlive;
@@ -64,21 +67,21 @@ namespace xtc.GameOfLife.GameOfLife
 
 			var cell = grid[coordinates];
 			if (cell == null) 
-				cell = new Cell<GameOfLifeCellMetadata>(grid, coordinates, new GameOfLifeCellMetadata(newPayloadAlive, payload.RoundsSurvived, matchingRule));
+				cell = new Cell<DayAndNightCellMetadata>(grid, coordinates, new DayAndNightCellMetadata(newPayloadAlive, payload.RoundsSurvived, matchingRule));
 
             switch (matchingRule)
             {
-                case GameOfLifeRule.KeepAlive:
+                case DayAndNightRule.KeepAlive:
                     cell.Payload.RoundsSurvived += 1;
                     break;
-                case GameOfLifeRule.NoMatch:
+                case DayAndNightRule.NoMatch:
                     break;
-                case GameOfLifeRule.Overcrowded:
-                case GameOfLifeRule.Underpopulated:
+                case DayAndNightRule.Overcrowded:
+                case DayAndNightRule.Underpopulated:
                     cell.Payload.RoundsSurvived = 0;
                     newPayloadAlive = false;
                     break;
-                case GameOfLifeRule.Respawn:
+                case DayAndNightRule.Respawn:
                     cell.Payload.RoundsSurvived = 0;
                     newPayloadAlive = true;
                     break;
@@ -89,7 +92,7 @@ namespace xtc.GameOfLife.GameOfLife
             cell.Payload.IsAlive = newPayloadAlive;
 		    cell.Payload.Rule = matchingRule;
 
-			if (newPayloadAlive != payload.IsAlive || (matchingRule == GameOfLifeRule.KeepAlive && cell.Payload.RoundsSurvived == 2))
+			if (newPayloadAlive != payload.IsAlive || (matchingRule == DayAndNightRule.KeepAlive && cell.Payload.RoundsSurvived == 2))
 				_gridRenderer.RenderCell(cell);//, matchingRule);
 
 			return cell;

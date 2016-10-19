@@ -17,7 +17,7 @@ namespace xtc.GameOfLife.Grids
 	/// </summary>
 	public interface IGridRenderer<T>
 	{
-		void RenderCell(Cell<T> cell, GameOfLifeRule rule);
+		void RenderCell(Cell<T> cell);
 		void RenderGrid(Grid<T> grid);
 	}
 }
