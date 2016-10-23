@@ -76,12 +76,21 @@
     <Compile Include="Games\TimedAction.cs" />
     <Compile Include="Geometry\Coordinates2D.cs" />
     <Compile Include="Geometry\Dimensions2D.cs" />
+    <Compile Include="Geometry\Direction2D.cs" />
     <Compile Include="Geometry\DirectionX2D.cs" />
     <Compile Include="Geometry\DirectionY2D.cs" />
     <Compile Include="Grids\Cell.cs" />
     <Compile Include="Grids\Grid.cs" />
     <Compile Include="Grids\ICellGenerator.cs" />
     <Compile Include="Grids\IGridRenderer.cs" />
+    <Compile Include="LangtonsAnt\ConsoleGridRenderer.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAnt.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntCellMetadata.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntCopyCellGenerator.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntIterationCellGenerator.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntParsingCellGenerator.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntRandomCellGenerator.cs" />
+    <Compile Include="LangtonsAnt\LangtonsAntRule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -141,12 +150,17 @@
     <Content Include="examples\DayAndNight\rocket.dan">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="examples\LangtonsAnt\test.la">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="examples" />
     <Folder Include="DayAndNight" />
     <Folder Include="examples\GameOfLife" />
     <Folder Include="examples\DayAndNight" />
+    <Folder Include="examples\LangtonsAnt" />
+    <Folder Include="LangtonsAnt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

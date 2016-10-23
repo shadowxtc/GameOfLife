@@ -1,0 +1,41 @@
+﻿#
+# Langton's Ant Example Data File
+#
+# Available values:
+# # = comment / ignore remainder of line
+# W or w = white cell
+# B or b = black cell
+# U = ant cell, white, direction=up
+# u = ant cell, black, direction=up
+# D = ant cell, white, direction=down
+# d = ant cell, black, direction=down
+# L = ant cell, white, direction=left
+# l = ant cell, black, direction=left
+# R = ant cell, white, direction=right
+# r = ant cell, black, direction=right
+#
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwuwwwwwwwwwwwb
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+BWWWWWWWWWWWWWWWWWWWWWWWB
+BWWWWWWWWWWWWWWWWWWWWWWWB
+bwwwwwwwwwwwwwwwwwwwwwwwb
+bbbbbbbbbbbbbbbbbbbbbbbbb

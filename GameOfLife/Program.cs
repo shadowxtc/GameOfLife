@@ -22,12 +22,20 @@ namespace xtc.GameOfLife
 				Console.WriteLine();
 				Console.WriteLine("[1] Game of Life");
 				Console.WriteLine("[2] Day and Night");
+				Console.WriteLine("[3] Langton's Ant");
 				Console.WriteLine();
 				Console.WriteLine("Your choice?");
 				
-				Game game = (Console.ReadLine() == "1" ? 
-				             (Game) new GameOfLife.GameOfLife(new GameOfLife.ConsoleGridRenderer()) :
-				             (Game) new DayAndNight.DayAndNight(new DayAndNight.ConsoleGridRenderer()));
+				Game game;
+				var result = Console.ReadLine();
+				
+				if (result == "1") {
+					game = (Game) new GameOfLife.GameOfLife(new GameOfLife.ConsoleGridRenderer());
+				}else if (result == "2") {
+					game = (Game) new DayAndNight.DayAndNight(new DayAndNight.ConsoleGridRenderer());
+				}else {
+					game = (Game) new LangtonsAnt.LangtonsAnt(new LangtonsAnt.ConsoleGridRenderer());
+				}
 				
 			    game.StartGame();
 			    
