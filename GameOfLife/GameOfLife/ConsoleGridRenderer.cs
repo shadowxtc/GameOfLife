@@ -7,7 +7,10 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections.Generic;
 using xtc.GameOfLife.Grids;
+using xtc.GameOfLife.Games;
+using xtc.GameOfLife.Geometry;
 
 namespace xtc.GameOfLife.GameOfLife
 {
@@ -17,8 +20,24 @@ namespace xtc.GameOfLife.GameOfLife
 	public class ConsoleGridRenderer
 		: IGridRenderer<GameOfLifeCellMetadata>
 	{
+		private Dimensions2D _dimensions;
+
+		public event RenderGridEventHandler<GameOfLifeCellMetadata> OnRenderGrid;
+		public event RenderCellEventHandler<GameOfLifeCellMetadata> OnRenderCell;
+		public event RenderMessagesEventHandler OnRenderMessages;
+		
 		public ConsoleGridRenderer()
 		{
+			_dimensions = null;
+		}
+		
+		public void StartSession() {
+			Console.CursorVisible = false;
+			Console.Clear();
+		}
+		
+		public void EndSession() {
+			Console.CursorVisible = true;
 		}
 		
 		public void RenderCell(Cell<GameOfLifeCellMetadata> cell) {
@@ -51,6 +70,8 @@ namespace xtc.GameOfLife.GameOfLife
         }
 
         public void RenderGrid(Grid<GameOfLifeCellMetadata> grid) {
+			_dimensions = grid.Dimensions;
+			
 			Console.SetCursorPosition(0, 0);
 			
 			Console.ResetColor();
@@ -100,6 +121,22 @@ namespace xtc.GameOfLife.GameOfLife
 			Console.WriteLine("═╝");
 			
 			// TODO: output counters/timers?  that really should be done in game class though
+		}
+		
+		public void RenderMessages(IEnumerable<GameMessage> messages)
+		{
+			Console.SetCursorPosition(0, _dimensions == null ? 0 : _dimensions.Height + 5);
+
+            foreach (var message in messages) {
+				Console.ForegroundColor = message.IsWarning ? ConsoleColor.Yellow : ConsoleColor.Gray;
+				Console.WriteLine(message.Message + "          ");
+			}
+		}
+
+		public void PromptToContinue() {
+			Console.WriteLine();
+			Console.WriteLine("Press any key to begin...");
+			Console.ReadKey(true);
 		}
 	}
 }

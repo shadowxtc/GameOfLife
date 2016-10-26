@@ -50,6 +50,8 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -65,6 +67,7 @@
     <Compile Include="DayAndNight\DayAndNightRule.cs" />
     <Compile Include="DayAndNight\DayAndNightParsingCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLife.cs" />
+    <Compile Include="GameOfLife\GameOfLifeConfiguration.cs" />
     <Compile Include="GameOfLife\GameOfLifeCopyCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLifeIterationCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLifeCellMetadata.cs" />
@@ -72,7 +75,9 @@
     <Compile Include="GameOfLife\GameOfLifeRandomCellGenerator.cs" />
     <Compile Include="GameOfLife\GameOfLifeRule.cs" />
     <Compile Include="GameOfLife\ConsoleGridRenderer.cs" />
+    <Compile Include="GameOfLife\GDIPlusGridRenderer.cs" />
     <Compile Include="Games\Game.cs" />
+    <Compile Include="Games\GameMessage.cs" />
     <Compile Include="Games\TimedAction.cs" />
     <Compile Include="Geometry\Coordinates2D.cs" />
     <Compile Include="Geometry\Dimensions2D.cs" />
@@ -83,6 +88,9 @@
     <Compile Include="Grids\Grid.cs" />
     <Compile Include="Grids\ICellGenerator.cs" />
     <Compile Include="Grids\IGridRenderer.cs" />
+    <Compile Include="Grids\RenderCellEventHandler.cs" />
+    <Compile Include="Grids\RenderGridEventHandler.cs" />
+    <Compile Include="Grids\RenderMessagesEventHandler.cs" />
     <Compile Include="LangtonsAnt\ConsoleGridRenderer.cs" />
     <Compile Include="LangtonsAnt\LangtonsAnt.cs" />
     <Compile Include="LangtonsAnt\LangtonsAntCellMetadata.cs" />

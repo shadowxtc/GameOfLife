@@ -30,7 +30,7 @@ namespace xtc.GameOfLife
 				var result = Console.ReadLine();
 				
 				if (result == "1") {
-					game = (Game) new GameOfLife.GameOfLife(new GameOfLife.ConsoleGridRenderer());
+					game = (Game) new GameOfLife.GameOfLife(new GameOfLife.ConsoleGridRenderer(), GameOfLife.GameOfLifeConfiguration.ReadFromConsole());
 				}else if (result == "2") {
 					game = (Game) new DayAndNight.DayAndNight(new DayAndNight.ConsoleGridRenderer());
 				}else {

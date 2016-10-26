@@ -18,6 +18,10 @@ namespace xtc.GameOfLife.LangtonsAnt
 	public class ConsoleGridRenderer
 		: IGridRenderer<LangtonsAntCellMetadata>
 	{
+		public event RenderMessagesEventHandler OnRenderMessages;
+		public event RenderGridEventHandler<LangtonsAntCellMetadata> OnRenderGrid;
+		public event RenderCellEventHandler<LangtonsAntCellMetadata> OnRenderCell;
+		
 		public ConsoleGridRenderer()
 		{
 		}
@@ -106,6 +110,26 @@ namespace xtc.GameOfLife.LangtonsAnt
 			Console.WriteLine("═╝");
 			
 			// TODO: output counters/timers?  that really should be done in game class though
+		}
+
+		public void StartSession()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RenderMessages(System.Collections.Generic.IEnumerable<xtc.GameOfLife.Games.GameMessage> messages)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void PromptToContinue()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EndSession()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

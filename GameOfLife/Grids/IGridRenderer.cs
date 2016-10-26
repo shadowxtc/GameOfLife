@@ -7,8 +7,9 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections.Generic;
 using xtc.GameOfLife.Grids;
-using xtc.GameOfLife.GameOfLife;
+using xtc.GameOfLife.Games;
 
 namespace xtc.GameOfLife.Grids
 {
@@ -17,7 +18,15 @@ namespace xtc.GameOfLife.Grids
 	/// </summary>
 	public interface IGridRenderer<T>
 	{
+		event RenderMessagesEventHandler OnRenderMessages;
+		event RenderGridEventHandler<T> OnRenderGrid;
+		event RenderCellEventHandler<T> OnRenderCell;
+		
+		void StartSession();
 		void RenderCell(Cell<T> cell);
 		void RenderGrid(Grid<T> grid);
+		void RenderMessages(IEnumerable<GameMessage> messages);
+		void PromptToContinue();
+		void EndSession();
 	}
 }
