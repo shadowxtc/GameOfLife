@@ -81,9 +81,6 @@ namespace xtc.GameOfLife.GameOfLife
             cell.Payload.IsAlive = newPayloadAlive;
 		    cell.Payload.Rule = matchingRule;
 
-			if (newPayloadAlive != payload.IsAlive || (matchingRule == GameOfLifeRule.KeepAlive && cell.Payload.RoundsSurvived == 2))
-				_gridRenderer.RenderCell(cell);//, matchingRule);
-
 			return cell;
 		}
 	}

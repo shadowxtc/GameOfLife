@@ -13,6 +13,9 @@ namespace xtc.GameOfLife.Games
 	    private readonly List<TimedAction> _timedActions;
 
 	    private bool _gameEnding = false;
+		private bool _paused;
+
+		public bool IsPaused => _paused;
 
 		public int MaxRounds { get; set; }
 		public int CurrentRound { get; set; }
@@ -95,6 +98,8 @@ namespace xtc.GameOfLife.Games
 		}
 
 		public virtual void NextRound() {
+			if (_paused)
+				return;
 			if (CurrentRound >= MaxRounds)
 			{
 				EndGame();
@@ -106,6 +111,9 @@ namespace xtc.GameOfLife.Games
 
 			RoundStarted = DateTime.UtcNow;
 		}
+
+		public void Pause() { _paused = true; }
+		public void Resume() { _paused = false; }
 
 	    public TimedAction CreateTimer(Action action, TimeSpan interval, TimeSpan? maxDuration = null, int? maxIterations = null)
 	    {

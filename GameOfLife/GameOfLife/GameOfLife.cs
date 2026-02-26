@@ -73,8 +73,9 @@ namespace xtc.GameOfLife.GameOfLife
 			base.NextRound();
 
 			lock (_lockObject) {
-				(CurrentRound % 2 == 0 ? _grid : _grid2).Regenerate();
-				
+				var activeGrid = CurrentRound % 2 == 0 ? _grid : _grid2;
+				activeGrid.Regenerate();
+				_gridRenderer.RenderGrid(activeGrid);
 				ShowMetrics(false);
 			}
 		}
