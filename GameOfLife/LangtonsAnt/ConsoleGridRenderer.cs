@@ -1,11 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/16/2016
- * Time: 12:37 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using xtc.GameOfLife.Grids;
 using xtc.GameOfLife.Geometry;
@@ -126,6 +118,9 @@ namespace xtc.GameOfLife.LangtonsAnt
 		{
 			throw new NotImplementedException();
 		}
+
+		public Task PromptToContinueAsync(CancellationToken cancellationToken = default) =>
+			Task.CompletedTask;
 
 		public void EndSession()
 		{

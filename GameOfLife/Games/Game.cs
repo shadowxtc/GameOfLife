@@ -1,11 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/16/2016
- * Time: 1:34 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,9 +36,10 @@ namespace xtc.GameOfLife.Games
 		}
 
 		protected abstract void ConfigureGame();
+		protected virtual Task ConfigureGameAsync() { ConfigureGame(); return Task.CompletedTask; }
 	    protected abstract void TeardownGame();
 
-	    public virtual async void EndGame()
+	    public virtual async Task EndGameAsync()
 	    {
 	    	lock (_lockObject)
 	    	{
@@ -68,12 +61,19 @@ namespace xtc.GameOfLife.Games
 
         	GameOver = true;
 	    }
+
+	    public void EndGame() => _ = EndGameAsync();
 		
 	    public virtual void HandleKeypress(char command) {
 	    	// NOTE: Intentionally blank.
 	    }
 	    
 		public virtual void StartGame()
+		{
+		    StartGameAsync().GetAwaiter().GetResult();
+		}
+
+		public virtual async Task StartGameAsync()
 		{
 		    lock (_lockObject)
 		    {
@@ -83,7 +83,7 @@ namespace xtc.GameOfLife.Games
 		        GameRunning = true;
 		    }
 
-            ConfigureGame();
+            await ConfigureGameAsync();
 
 		    if (AutoIncrementRound.HasValue)
 		    {

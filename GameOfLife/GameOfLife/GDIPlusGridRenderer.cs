@@ -1,15 +1,7 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/23/2016
- * Time: 11:33 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
-using System.Windows.Forms;
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using xtc.GameOfLife.Games;
 using xtc.GameOfLife.Grids;
 
@@ -60,20 +52,25 @@ namespace xtc.GameOfLife.GameOfLife
 
 		public void PromptToContinue()
 		{
+			PromptToContinueAsync().GetAwaiter().GetResult();
+		}
+
+		public async Task PromptToContinueAsync(CancellationToken cancellationToken = default)
+		{
 			RenderMessages(new List<GameMessage> { new GameMessage("Get Ready!!!", true) });
-			Thread.Sleep(500);
+			await Task.Delay(500, cancellationToken);
 
 			RenderMessages(new List<GameMessage> { new GameMessage("Get Ready!", true), new GameMessage(""), new GameMessage("Starting in 3...") });
-			Thread.Sleep(1000);
+			await Task.Delay(1000, cancellationToken);
 
 			RenderMessages(new List<GameMessage> { new GameMessage("Get Ready!", true), new GameMessage(""), new GameMessage("Starting in 2...") });
-			Thread.Sleep(1000);
+			await Task.Delay(1000, cancellationToken);
 
 			RenderMessages(new List<GameMessage> { new GameMessage("Get Ready!", true), new GameMessage(""), new GameMessage("Starting in 1...") });
-			Thread.Sleep(1000);
+			await Task.Delay(1000, cancellationToken);
 
 			RenderMessages(new List<GameMessage> { new GameMessage("GO!!!", true) });
-			Thread.Sleep(100);
+			await Task.Delay(100, cancellationToken);
 		}
 
 		public void EndSession()

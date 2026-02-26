@@ -1,13 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/23/2016
- * Time: 5:16 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -24,17 +14,13 @@ namespace GameOfLifeUI
 	public partial class MainForm : Form
 	{
 		private readonly GDIPlusGridRenderer _gridRenderer;
-		private readonly BackgroundWorker _bgWorker;
-		
+
 		public MainForm()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-
-			_bgWorker = new BackgroundWorker();
-			
 
 			_gridRenderer = new GDIPlusGridRenderer(this);
 			_gridRenderer.OnRenderMessages += (messages) => {
@@ -70,10 +56,10 @@ namespace GameOfLifeUI
 				}
 			};
 
-			this.button1.Click += (sender, e) => {
+			this.button1.Click += async (sender, e) => {
 				this.button1.Visible = false;
 				var gol = new GameOfLife(_gridRenderer, new GameOfLifeConfiguration(500, 0, this.ClientRectangle.Width / 7, this.ClientRectangle.Height / 7, 2));
-				gol.StartGame();
+				await gol.StartGameAsync();
 			};
 		}
 		

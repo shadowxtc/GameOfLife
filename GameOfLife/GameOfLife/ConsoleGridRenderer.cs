@@ -1,11 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/16/2016
- * Time: 12:37 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using System.Collections.Generic;
 using xtc.GameOfLife.Grids;
@@ -138,5 +130,8 @@ namespace xtc.GameOfLife.GameOfLife
 			Console.WriteLine("Press any key to begin...");
 			Console.ReadKey(true);
 		}
+
+		public Task PromptToContinueAsync(CancellationToken cancellationToken = default) =>
+			Task.Run(PromptToContinue, cancellationToken);
 	}
 }

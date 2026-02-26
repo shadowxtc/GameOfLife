@@ -1,11 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/15/2016
- * Time: 8:11 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using System.Threading;
 using xtc.GameOfLife.Games;
