@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace xtc.GameOfLife.Games
     	public int CurrentIteration { get; private set; }
     	public DateTime StartTime { get; private set; }
     	public DateTime IterationStartTime { get; private set; }
-    	public Task TimerTask { get; private set; }
+    	public Task? TimerTask { get; private set; }
     	public CancellationTokenSource CancellationTokenSource { get; private set; }
     	
     	public int? MaxIterations { get; set; }
@@ -51,8 +51,7 @@ namespace xtc.GameOfLife.Games
     			Started = true;
     			StartTime = DateTime.UtcNow;
 
-    			TimerTask = new Task(Iterate, CancellationTokenSource.Token);
-    			TimerTask.Start();
+    			TimerTask = IterateAsync();
     		}
     	}
     	
@@ -60,7 +59,7 @@ namespace xtc.GameOfLife.Games
     		CancellationTokenSource.Cancel();
     	}
     	
-    	private async void Iterate() {
+    	private async Task IterateAsync() {
     		while(!CancellationTokenSource.IsCancellationRequested) {
 	    		if (MaxIterations.HasValue && CurrentIteration >= MaxIterations.Value)
 	    			break;

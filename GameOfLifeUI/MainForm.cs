@@ -1,15 +1,6 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/23/2016
- * Time: 5:16 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using xtc.GameOfLife.GameOfLife;
 using xtc.GameOfLife.Games;
@@ -23,17 +14,13 @@ namespace GameOfLifeUI
 	public partial class MainForm : Form
 	{
 		private readonly GDIPlusGridRenderer _gridRenderer;
-		private readonly BackgroundWorker _bgWorker;
-		
+
 		public MainForm()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-
-			_bgWorker = new BackgroundWorker();
-			
 
 			_gridRenderer = new GDIPlusGridRenderer(this);
 			_gridRenderer.OnRenderMessages += (messages) => {
@@ -69,10 +56,10 @@ namespace GameOfLifeUI
 				}
 			};
 
-			this.button1.Click += (sender, e) => {
+			this.button1.Click += async (sender, e) => {
 				this.button1.Visible = false;
-				var gol = new GameOfLife(_gridRenderer, new GameOfLifeConfiguration(500, 0, this.ClientRectangle.Width / 5, this.ClientRectangle.Height / 5, 2));
-				gol.StartGame();
+				var gol = new GameOfLife(_gridRenderer, new GameOfLifeConfiguration(500, 0, this.ClientRectangle.Width / 7, this.ClientRectangle.Height / 7, 2));
+				await gol.StartGameAsync();
 			};
 		}
 		
@@ -107,16 +94,44 @@ namespace GameOfLifeUI
 					throw new InvalidOperationException("Unknown rule.");
 			}
 
-			var x = (cell.Coordinates.X * 5) + 10;
-			var y = (cell.Coordinates.Y * 5) + 10;
+			var x = (cell.Coordinates.X * 7) + 10;
+			var y = (cell.Coordinates.Y * 7) + 10;
 			
 			using (var g = Graphics.FromHwnd(this.Handle)) {
-				using (var b = new SolidBrush(cell.Payload.IsAlive ? color : Color.Black))
-					g.FillRectangle(b, x + 1, y + 1, 3, 3);
+				using (var b = new SolidBrush(Color.Black))
+					g.FillRectangle(b, x, y, 7, 7);
 					
-				if (!cell.Payload.IsAlive)
+				if (cell.Payload.IsAlive) {
 					using (var b = new SolidBrush(color))
-						g.FillRectangle(b, x + 2, y + 2, 1, 1);
+						g.FillRectangle(b, x + 1, y + 1, 5, 5);
+	
+					foreach(var c in cell.Neighbors.Where(n => n.Payload.IsAlive)) {
+						var dx = x + 3;
+						var dy = y + 3;
+						
+						if (c.Coordinates.X > cell.Coordinates.X) {
+							dx += 3;
+						} else if (c.Coordinates.X < cell.Coordinates.X) {
+							dx -= 3;
+						}
+						
+						if (c.Coordinates.Y > cell.Coordinates.Y) {
+							dy += 3;
+						} else if (c.Coordinates.Y < cell.Coordinates.Y) {
+							dy -= 3;
+						}
+						
+						using (var b = new SolidBrush(Color.White))
+							g.FillRectangle(b, 
+							                dx,
+							                dy,
+							                1,
+							                1);
+					}
+				} else {
+					using (var b = new SolidBrush(color))
+						g.FillRectangle(b, x + 3, y + 3, 1, 1);
+				}
 			}
 		}
 		
@@ -124,7 +139,7 @@ namespace GameOfLifeUI
 			int paddingX = 20; // .|.|......  ......|.|.
 			int paddingY = 70; // 10 top, 10 bottom just like sides, plus room for text
 			
-			ResizeForm((grid.Dimensions.Width * 5) + paddingX, (grid.Dimensions.Height * 5) + paddingY);
+			ResizeForm((grid.Dimensions.Width * 7) + paddingX, (grid.Dimensions.Height * 7) + paddingY);
 
 			using (var g = Graphics.FromHwnd(this.Handle)) {
 				using (var b = new SolidBrush(Color.Black))

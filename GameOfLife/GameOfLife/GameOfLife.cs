@@ -1,11 +1,3 @@
-﻿/*
- * Created by SharpDevelop.
- * User: shado
- * Date: 10/16/2016
- * Time: 1:36 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -37,8 +29,13 @@ namespace xtc.GameOfLife.GameOfLife
 		
 		protected override void ConfigureGame()
 		{
+			ConfigureGameAsync().GetAwaiter().GetResult();
+		}
+
+		protected override async Task ConfigureGameAsync()
+		{
 			_gridRenderer.StartSession();
-			
+
 			if (string.IsNullOrWhiteSpace(_configuration.Filename)) {
 	            _grid = new Grid<GameOfLifeCellMetadata>(new Dimensions2D(_configuration.Width, _configuration.Height), new GameOfLifeRandomCellGenerator(_configuration.LifeProbability));
 			} else {
@@ -47,11 +44,11 @@ namespace xtc.GameOfLife.GameOfLife
 			}
 
             _initialGrid = _grid;
-            
+
 			ResetSimulation();
 
-			_gridRenderer.PromptToContinue();
-			
+			await _gridRenderer.PromptToContinueAsync();
+
 			AutoIncrementRound = TimeSpan.FromMilliseconds(_configuration.Interval);
 		}
 

@@ -3,7 +3,20 @@
 A cool console game framework, grid game framework, and implementation of Conway's Game of Life.
 
 # Build / Run
-Load into your favorite C# IDE or use MSBuild.
+Requires [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (Windows for the UI project).
+
+```bash
+# Build the solution
+dotnet build
+
+# Run the WinForms UI (Conway's Game of Life)
+dotnet run --project GameOfLifeUI
+
+# Run the console app (core library + console renderer)
+dotnet run --project GameOfLife
+```
+
+You can also open `GameOfLife.sln` in Visual Studio 2022 or your favorite C# IDE.
 
 # Testing
 No unit tests (yet?) but there are many examples which can be loaded from the /examples folder and verified visually against similar examples found on Wikipedia.
